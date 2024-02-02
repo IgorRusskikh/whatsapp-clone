@@ -1,19 +1,20 @@
-import SvgUser from '../public/svg/default-user';
-
-const Message = () => {
+const Message = ({ children, date }: { children: any; date: string }) => {
   return (
-    <div className="flex items-center text-left text-white relative cursor-pointer hover:bg-[#202c33]">
-      <div className="px-4">
-        <SvgUser height={"50"} width={"50"} />
-      </div>
-      <div className="flex flex-col h-full w-full border-b border-[#222d34] py-4">
-        <h2 className="text-[17px]">Мама</h2>
-        <p className="text-[#8696a0] text-sm">
-          Lorem ipsum dolor sit amet consectetur...
-        </p>
-      </div>
-      <div className="absolute right-3 top-3 text-xs">
-        <p className="text-[#8696a0]">Вчера</p>
+    <div className="flex items-end bg-[#005c4b] text-[#e9edef] rounded-lg max-w-[70%]">
+      <div
+        className={
+          "px-5 py-2 relative " +
+          (children.length > 10
+            ? "pb-4 bottom-0"
+            : children.length < 10
+            ? "pr-20 bottom-0"
+            : "pr-20 bottom-0")
+        }
+      >
+        {children}
+        <div className="absolute w-fit h-fit text-xs text-[#99beb7] mr-2 right-1 bottom-1">
+          {date}
+        </div>
       </div>
     </div>
   );

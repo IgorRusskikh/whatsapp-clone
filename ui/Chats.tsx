@@ -1,22 +1,35 @@
+import Input from '../components/Input';
+import SvgCommunityOutline from '../public/svg/community-outline';
+import SvgUser from '../public/svg/default-user';
 import SvgFilter from '../public/svg/filter';
 import Lock from '../public/svg/lock';
+import SvgMenu from '../public/svg/menu';
+import SvgNewChat from '../public/svg/new-chat-outline';
 import SvgSearch from '../public/svg/search';
-import Message from '../ui/Message';
+import SvgStatusOutline from '../public/svg/status-outline';
+import Message from './ChatMessage';
 import ChatsHeader from './ChatsHeader';
 
 const Chats = () => {
   return (
     <div className="h-full w-[50%] bg-[#111b21]">
-      <ChatsHeader />
+      <ChatsHeader>
+        <span>
+          <SvgUser height="40" width="40" />
+        </span>
+        <div className="flex gap-6">
+          {headerSvgs.map((svg, index) => (
+            <span key={index} className="cursor-pointer">
+              {svg}
+            </span>
+          ))}
+        </div>
+      </ChatsHeader>
       <div className="flex flex-col w-full h-auto">
         <div className="pl-3 w-full flex my-2 items-center">
           <div className="flex items-center bg-[#202c33] w-full pl-3 rounded-lg">
             <SvgSearch />
-            <input
-              type="text"
-              className="bg-transparent px-2 py-2 text-white outline-none select-none"
-              placeholder="Поиск чатов или новый чат"
-            />
+            <Input>Поиск чатов или новый чат</Input>
           </div>
           <div className="mx-2">
             <SvgFilter />
@@ -42,5 +55,12 @@ const Chats = () => {
     </div>
   );
 };
+
+const headerSvgs = [
+  <SvgCommunityOutline />,
+  <SvgStatusOutline />,
+  <SvgNewChat />,
+  <SvgMenu />,
+];
 
 export default Chats;

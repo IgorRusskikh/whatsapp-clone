@@ -1,9 +1,9 @@
-export default function SvgFilter() {
+export default function SvgSend() {
   return (
     <svg
       viewBox="0 0 24 24"
-      height="20"
-      width="20"
+      height="24"
+      width="24"
       preserveAspectRatio="xMidYMid meet"
       className=""
       version="1.1"
@@ -11,10 +11,10 @@ export default function SvgFilter() {
       y="0px"
       enableBackground="new 0 0 24 24"
     >
-      <title>filter</title>
+      <title>send</title>
       <path
         fill="#9ca9af"
-        d="M10,18.1h4v-2h-4V18.1z M3,6.1v2h18v-2H3z M6,13.1h12v-2H6V13.1z"
+        d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"
       ></path>
     </svg>
   );
