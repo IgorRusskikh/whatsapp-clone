@@ -1,8 +1,24 @@
 import SvgUser from '../public/svg/default-user';
 
-const Message = () => {
+const Message = ({
+  index,
+  setChat,
+  messages,
+  setMessages,
+}: {
+  index: number;
+  setChat: Function;
+  messages: string[];
+  setMessages: Function;
+}) => {
   return (
-    <div className="flex items-center text-left text-white relative cursor-pointer hover:bg-[#202c33]">
+    <div
+      onClick={() => {
+        setChat(1);
+        setMessages([chats[index]]);
+      }}
+      className="flex items-center text-left text-white relative cursor-pointer hover:bg-[#202c33]"
+    >
       <div className="px-4">
         <SvgUser height={"50"} width={"50"} />
       </div>
@@ -18,5 +34,12 @@ const Message = () => {
     </div>
   );
 };
+
+const chats = [
+  ["sddfs", "1231", "12"],
+  ["sddfs", "1231", "12", "jyutjujl"],
+  ["sddfs", "1231"],
+  ["sddfs", "1231", "12", "jyutjujl", "s3e12e122"],
+];
 
 export default Message;

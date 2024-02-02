@@ -30,6 +30,7 @@ const MessageInput = ({
           {/* <SvgMicrophone /> */}
           <div
             onClick={() => {
+              
               setMessages([...messages, newMessage]);
             }}
           >

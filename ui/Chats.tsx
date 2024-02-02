@@ -10,7 +10,15 @@ import SvgStatusOutline from '../public/svg/status-outline';
 import Message from './ChatMessage';
 import ChatsHeader from './ChatsHeader';
 
-const Chats = () => {
+const Chats = ({
+  setChat,
+  messages,
+  setMessages,
+}: {
+  setChat: Function;
+  messages: any[];
+  setMessages: Function;
+}) => {
   return (
     <div className="h-full w-[50%] bg-[#111b21]">
       <ChatsHeader>
@@ -38,7 +46,13 @@ const Chats = () => {
         <div className="flex flex-col">
           <div className="flex flex-col">
             {[1, 2, 3, 4].map((msg, index) => (
-              <Message key={index} />
+              <Message
+                index={index}
+                setChat={setChat}
+                messages={messages}
+                setMessages={setMessages}
+                key={index}
+              />
             ))}
           </div>
           <div className="flex justify-center items-center gap-1 w-full text-xs my-4">
