@@ -1,22 +1,37 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import Chat from '../../ui/Chat';
-import Chats from '../../ui/Chats';
-import DefaultScreen from '../../ui/DefaultScreen';
-import Message from '../../ui/Message';
-import MessageInput from '../../ui/MessageInput';
+import useSocket from '@/hooks/useSocket';
+
+import Chat from '../ui/Chat';
+import Chats from '../ui/Chats';
+import DefaultScreen from '../ui/DefaultScreen';
+import Message from '../ui/Message';
+import MessageInput from '../ui/MessageInput';
 
 export default function Home() {
-  const [messages, setMessages] = useState([]);
+  const [room, setRoom] = useState();
   const [newMessage, setNewMessage] = useState("");
   const [chat, setChat] = useState(undefined);
 
+  const [socket, messages, setMessages] = useSocket("http://localhost:8000");
+
+  useEffect(() => {
+    if (socket) {
+      socket.emit("join", { room: "1" });
+    }
+  }, [room]);
+
   return (
     <div className="flex justify-center w-auto mx-48">
-      <div className="flex w-full h-[100vh] py-4">
-        <Chats setChat={setChat} messages={messages} setMessages={setMessages} />
+      <div className="flex w-full h-[100vh] py-4" onClick={() => setRoom(1)}>
+        <Chats
+          setRoom={setRoom}
+          setChat={setChat}
+          messages={messages}
+          setMessages={setMessages}
+        />
         {chat ? (
           <div className="w-full h-full bg-[#111b21] border-l border-[#e9edef1f] relative">
             <Chat />
@@ -32,6 +47,7 @@ export default function Home() {
               </div>
             </div>
             <MessageInput
+              socket={socket}
               newMessage={newMessage}
               setNewMessage={setNewMessage}
               messages={messages}

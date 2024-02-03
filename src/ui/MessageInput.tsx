@@ -1,15 +1,17 @@
+import SvgPlus from '../../public/svg/plus';
+import SvgSend from '../../public/svg/send';
+import SvgSmile from '../../public/svg/smile';
 import Input from '../components/Input';
-import SvgPlus from '../public/svg/plus';
-import SvgSend from '../public/svg/send';
-import SvgSmile from '../public/svg/smile';
-import ChatsHeader from '../ui/ChatsHeader';
+import ChatsHeader from './ChatsHeader';
 
 const MessageInput = ({
+  socket,
   newMessage,
   setNewMessage,
   messages,
   setMessages,
 }: {
+  socket: any;
   newMessage: string;
   setNewMessage: Function;
   messages: any[];
@@ -30,7 +32,7 @@ const MessageInput = ({
           {/* <SvgMicrophone /> */}
           <div
             onClick={() => {
-              
+              socket.emit("message", { room: "1",message: newMessage });
               setMessages([...messages, newMessage]);
             }}
           >

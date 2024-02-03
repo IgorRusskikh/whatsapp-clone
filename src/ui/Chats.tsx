@@ -1,20 +1,22 @@
+import SvgCommunityOutline from '../../public/svg/community-outline';
+import SvgUser from '../../public/svg/default-user';
+import SvgFilter from '../../public/svg/filter';
+import Lock from '../../public/svg/lock';
+import SvgMenu from '../../public/svg/menu';
+import SvgNewChat from '../../public/svg/new-chat-outline';
+import SvgSearch from '../../public/svg/search';
+import SvgStatusOutline from '../../public/svg/status-outline';
 import Input from '../components/Input';
-import SvgCommunityOutline from '../public/svg/community-outline';
-import SvgUser from '../public/svg/default-user';
-import SvgFilter from '../public/svg/filter';
-import Lock from '../public/svg/lock';
-import SvgMenu from '../public/svg/menu';
-import SvgNewChat from '../public/svg/new-chat-outline';
-import SvgSearch from '../public/svg/search';
-import SvgStatusOutline from '../public/svg/status-outline';
 import Message from './ChatMessage';
 import ChatsHeader from './ChatsHeader';
 
 const Chats = ({
+  setRoom,
   setChat,
   messages,
   setMessages,
 }: {
+  setRoom: Function;
   setChat: Function;
   messages: any[];
   setMessages: Function;
@@ -47,6 +49,7 @@ const Chats = ({
           <div className="flex flex-col">
             {[1, 2, 3, 4].map((msg, index) => (
               <Message
+                setRoom={setRoom}
                 index={index}
                 setChat={setChat}
                 messages={messages}

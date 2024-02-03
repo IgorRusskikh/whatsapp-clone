@@ -1,7 +1,7 @@
-import SvgUser from '../public/svg/default-user';
-import SvgMenu from '../public/svg/menu';
-import SvgSearch from '../public/svg/search';
-import ChatsHeader from '../ui/ChatsHeader';
+import SvgUser from '../../public/svg/default-user';
+import SvgMenu from '../../public/svg/menu';
+import SvgSearch from '../../public/svg/search';
+import ChatsHeader from './ChatsHeader';
 
 const Chat = () => {
   return (

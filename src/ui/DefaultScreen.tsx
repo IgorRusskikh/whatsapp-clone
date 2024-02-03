@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import Lock from '../public/svg/lock';
+import Lock from '../../public/svg/lock';
 
 const DefaultScreen = () => {
   return (

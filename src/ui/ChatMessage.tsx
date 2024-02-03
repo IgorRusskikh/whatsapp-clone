@@ -1,19 +1,22 @@
-import SvgUser from '../public/svg/default-user';
+import SvgUser from '../../public/svg/default-user';
 
 const Message = ({
   index,
   setChat,
   messages,
   setMessages,
+  setRoom
 }: {
   index: number;
   setChat: Function;
   messages: string[];
   setMessages: Function;
+  setRoom: Function
 }) => {
   return (
     <div
       onClick={() => {
+        setRoom(1)
         setChat(1);
         setMessages([chats[index]]);
       }}
