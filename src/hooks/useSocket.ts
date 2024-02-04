@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const useSocket = (url: string) => {
+const useSocket = (url: string, msgCb: Function) => {
   const [socket, setSocket] = useState();
-  const [messages, setMessages] = useState([]);
-
   useEffect(() => {
     const socketIo = io(url);
 
@@ -17,8 +15,7 @@ const useSocket = (url: string) => {
     });
 
     socketIo.on("message", (message: any) => {
-      console.log(...messages);
-      setMessages([...messages, message]);
+      msgCb(message);
     });
 
     return () => {
@@ -26,7 +23,7 @@ const useSocket = (url: string) => {
     };
   }, []);
 
-  return [socket, messages, setMessages];
+  return socket;
 };
 
 export default useSocket;

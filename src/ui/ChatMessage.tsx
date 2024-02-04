@@ -1,24 +1,17 @@
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setChat } from '@/features/chat/chatSlice';
+
 import SvgUser from '../../public/svg/default-user';
 
-const Message = ({
-  index,
-  setChat,
-  messages,
-  setMessages,
-  setRoom
-}: {
-  index: number;
-  setChat: Function;
-  messages: string[];
-  setMessages: Function;
-  setRoom: Function
-}) => {
+const Message = ({ id }: { id: string }) => {
+  const dispatch = useDispatch();
+  const chat = useSelector((state) => state.chat);
+
   return (
     <div
       onClick={() => {
-        setRoom(1)
-        setChat(1);
-        setMessages([chats[index]]);
+        dispatch(setChat(id));
       }}
       className="flex items-center text-left text-white relative cursor-pointer hover:bg-[#202c33]"
     >

@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 import SvgCommunityOutline from '../../public/svg/community-outline';
 import SvgUser from '../../public/svg/default-user';
 import SvgFilter from '../../public/svg/filter';
@@ -10,17 +13,19 @@ import Input from '../components/Input';
 import Message from './ChatMessage';
 import ChatsHeader from './ChatsHeader';
 
-const Chats = ({
-  setRoom,
-  setChat,
-  messages,
-  setMessages,
-}: {
-  setRoom: Function;
-  setChat: Function;
-  messages: any[];
-  setMessages: Function;
-}) => {
+const Chats = ({ socket }: { socket: any }) => {
+  const chat = useSelector((state: any) => state.chat);
+
+  useEffect(() => {
+    if (socket) {
+      if (chat.chatId) {
+        socket.emit("leave", { room: chat.oldChatId });
+      }
+
+      socket.emit("join", { room: chat.chatId });
+    }
+  }, [socket, chat]);
+
   return (
     <div className="h-full w-[50%] bg-[#111b21]">
       <ChatsHeader>
@@ -39,7 +44,7 @@ const Chats = ({
         <div className="pl-3 w-full flex my-2 items-center">
           <div className="flex items-center bg-[#202c33] w-full pl-3 rounded-lg">
             <SvgSearch />
-            <Input>Поиск чатов или новый чат</Input>
+            <Input classes="bg-transparent">Поиск чатов или новый чат</Input>
           </div>
           <div className="mx-2">
             <SvgFilter />
@@ -48,14 +53,9 @@ const Chats = ({
         <div className="flex flex-col">
           <div className="flex flex-col">
             {[1, 2, 3, 4].map((msg, index) => (
-              <Message
-                setRoom={setRoom}
-                index={index}
-                setChat={setChat}
-                messages={messages}
-                setMessages={setMessages}
-                key={index}
-              />
+              <div key={index}>
+                <Message id={index.toString()} />
+              </div>
             ))}
           </div>
           <div className="flex justify-center items-center gap-1 w-full text-xs my-4">

@@ -12,7 +12,7 @@ const Input = ({
       onChange={(evt) => onChange(evt)}
       type="text"
       className={
-        "bg-transparent px-2 py-2 text-white outline-none select-none " +
+        "px-2 py-2 text-white outline-none select-none " +
         classes
       }
       placeholder={children}

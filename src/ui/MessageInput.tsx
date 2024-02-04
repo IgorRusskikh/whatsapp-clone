@@ -1,22 +1,23 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import SvgPlus from '../../public/svg/plus';
 import SvgSend from '../../public/svg/send';
 import SvgSmile from '../../public/svg/smile';
 import Input from '../components/Input';
 import ChatsHeader from './ChatsHeader';
 
-const MessageInput = ({
-  socket,
-  newMessage,
-  setNewMessage,
-  messages,
-  setMessages,
-}: {
-  socket: any;
-  newMessage: string;
-  setNewMessage: Function;
-  messages: any[];
-  setMessages: Function;
-}) => {
+const MessageInput = ({ socket }: { socket: any }) => {
+  const [newMessage, setNewMessage] = useState("");
+  const chat = useSelector((state) => state.chat);
+
+  const sendMessage = () => {
+    socket.emit("message", {
+      room: chat.chatId,
+      message: newMessage,
+    });
+  };
+
   return (
     <div className="absolute bottom-0 bg-[#202c33] w-full">
       <ChatsHeader>
@@ -30,12 +31,7 @@ const MessageInput = ({
             Введите сообщение
           </Input>
           {/* <SvgMicrophone /> */}
-          <div
-            onClick={() => {
-              socket.emit("message", { room: "1",message: newMessage });
-              setMessages([...messages, newMessage]);
-            }}
-          >
+          <div onClick={sendMessage}>
             <SvgSend />
           </div>
         </div>
