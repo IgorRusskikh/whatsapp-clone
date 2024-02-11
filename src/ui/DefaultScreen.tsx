@@ -1,7 +1,5 @@
 import Image from 'next/image';
 
-import Lock from '../../public/svg/lock';
-
 const DefaultScreen = () => {
   return (
     <div className="flex flex-col w-full h-full justify-center items-center relative">
@@ -29,7 +27,7 @@ const DefaultScreen = () => {
       </div>
       <div className="flex items-center gap-1 absolute bottom-10 text-[#667781] text-sm">
         <span>
-          <Lock />
+          <Image src="/svg/lock.svg" width={12} height={12} alt="" />
         </span>
         Защищено сквозным шифрованием
       </div>

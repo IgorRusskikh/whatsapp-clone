@@ -1,25 +1,23 @@
-import { useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image';
+import { useDispatch } from 'react-redux';
 
 import { setChat } from '@/features/chat/chatSlice';
 
-import SvgUser from '../../public/svg/default-user';
-
-const Message = ({ id }: { id: string }) => {
+const Message = ({ chatData }: { chatData: any }) => {
   const dispatch = useDispatch();
-  const chat = useSelector((state) => state.chat);
 
   return (
     <div
       onClick={() => {
-        dispatch(setChat(id));
+        dispatch(setChat(chatData.id));
       }}
       className="flex items-center text-left text-white relative cursor-pointer hover:bg-[#202c33]"
     >
       <div className="px-4">
-        <SvgUser height={"50"} width={"50"} />
+        <Image src="/svg/user.svg" width={60} height={60} alt="" />
       </div>
       <div className="flex flex-col h-full w-full border-b border-[#222d34] py-4">
-        <h2 className="text-[17px]">Мама</h2>
+        <h2 className="text-[17px]">{chatData.reciever}</h2>
         <p className="text-[#8696a0] text-sm">
           Lorem ipsum dolor sit amet consectetur...
         </p>
@@ -30,12 +28,5 @@ const Message = ({ id }: { id: string }) => {
     </div>
   );
 };
-
-const chats = [
-  ["sddfs", "1231", "12"],
-  ["sddfs", "1231", "12", "jyutjujl"],
-  ["sddfs", "1231"],
-  ["sddfs", "1231", "12", "jyutjujl", "s3e12e122"],
-];
 
 export default Message;

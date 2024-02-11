@@ -1,6 +1,5 @@
-export default function SvgStatusOutline() {
-  return (
-    <svg
+<svg
+xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       height="24"
       width="24"
@@ -25,8 +24,6 @@ export default function SvgStatusOutline() {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M11.9999 16C14.2091 16 15.9999 14.2092 15.9999 12C15.9999 9.79088 14.2091 8.00002 11.9999 8.00002C9.7908 8.00002 7.99994 9.79088 7.99994 12C7.99994 14.2092 9.7908 16 11.9999 16ZM11.9999 18C15.3136 18 17.9999 15.3137 17.9999 12C17.9999 8.68631 15.3136 6.00002 11.9999 6.00002C8.68623 6.00002 5.99994 8.68631 5.99994 12C5.99994 15.3137 8.68623 18 11.9999 18Z"
-        fill="#9ca9af"
+        fill=""
       ></path>
     </svg>
-  );
-}

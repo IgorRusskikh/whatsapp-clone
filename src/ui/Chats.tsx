@@ -1,19 +1,14 @@
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import SvgCommunityOutline from '../../public/svg/community-outline';
-import SvgUser from '../../public/svg/default-user';
-import SvgFilter from '../../public/svg/filter';
-import Lock from '../../public/svg/lock';
-import SvgMenu from '../../public/svg/menu';
-import SvgNewChat from '../../public/svg/new-chat-outline';
-import SvgSearch from '../../public/svg/search';
-import SvgStatusOutline from '../../public/svg/status-outline';
+import useUser from '@/hooks/useUser';
+
 import Input from '../components/Input';
 import Message from './ChatMessage';
-import ChatsHeader from './ChatsHeader';
 
 const Chats = ({ socket }: { socket: any }) => {
+  const [user] = useUser();
   const chat = useSelector((state: any) => state.chat);
 
   useEffect(() => {
@@ -27,40 +22,38 @@ const Chats = ({ socket }: { socket: any }) => {
   }, [socket, chat]);
 
   return (
-    <div className="h-full w-[50%] bg-[#111b21]">
-      <ChatsHeader>
-        <span>
-          <SvgUser height="40" width="40" />
-        </span>
-        <div className="flex gap-6">
-          {headerSvgs.map((svg, index) => (
-            <span key={index} className="cursor-pointer">
-              {svg}
-            </span>
-          ))}
+    <div className="h-full bg-[#111b21]">
+      <div className="w-2/5">
+        <div className="flex justify-between items-center w-full bg-[#202c33] px-4 py-3">
+          <Image src="/svg/user.svg" width={40} height={40} alt="" />
+          <div className="flex">
+            {headerSvgs.map((svg, index) => (
+              <Image key={index} src={svg} width={24} height={24} alt="" />
+            ))}
+          </div>
         </div>
-      </ChatsHeader>
+      </div>
       <div className="flex flex-col w-full h-auto">
         <div className="pl-3 w-full flex my-2 items-center">
           <div className="flex items-center bg-[#202c33] w-full pl-3 rounded-lg">
-            <SvgSearch />
+            <Image src="/svg/search.svg" width={28} height={28} alt="" />
             <Input classes="bg-transparent">Поиск чатов или новый чат</Input>
           </div>
           <div className="mx-2">
-            <SvgFilter />
+            <Image src="/svg/filter.svg" width={28} height={28} alt="" />
           </div>
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col">
-            {[1, 2, 3, 4].map((msg, index) => (
-              <div key={index}>
-                <Message id={index.toString()} />
+            {user?.chats.map((chat: any) => (
+              <div key={chat.id}>
+                <Message chatData={chat} />
               </div>
             ))}
           </div>
           <div className="flex justify-center items-center gap-1 w-full text-xs my-4">
             <span className="mx-1">
-              <Lock />
+              <Image src="/svg/lock.svg" width={12} height={12} alt="" />
             </span>
             <span className="text-white">Ваши личные сообщения </span>
             <span className="text-[#53bdeb] cursor-pointer">
@@ -74,10 +67,10 @@ const Chats = ({ socket }: { socket: any }) => {
 };
 
 const headerSvgs = [
-  <SvgCommunityOutline />,
-  <SvgStatusOutline />,
-  <SvgNewChat />,
-  <SvgMenu />,
+  "/svg/community.svg",
+  "/svg/status.svg",
+  "/svg/new-chat-outline.svg",
+  "/svg/menu.svg",
 ];
 
 export default Chats;

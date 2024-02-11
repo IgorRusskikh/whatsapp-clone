@@ -1,6 +1,5 @@
-import SvgUser from '../../public/svg/default-user';
-import SvgMenu from '../../public/svg/menu';
-import SvgSearch from '../../public/svg/search';
+import Image from 'next/image';
+
 import ChatsHeader from './ChatsHeader';
 
 const Chat = () => {
@@ -8,13 +7,13 @@ const Chat = () => {
     <ChatsHeader>
       <div className="flex items-center gap-4 text-[#e9edef]">
         <span>
-          <SvgUser height="40" width="40" />
+          <Image src="/svg/user.svg" width={40} height={40} alt="" />
         </span>
         <span>+2425345634</span>
       </div>
-      <div className="flex gap-5">
-        <SvgSearch />
-        <SvgMenu />
+      <div className="flex items-center gap-5">
+        <Image src="/svg/search.svg" width={30} height={30} alt="" />
+        <Image src="/svg/menu.svg" width={30} height={30} alt="" />
       </div>
     </ChatsHeader>
   );

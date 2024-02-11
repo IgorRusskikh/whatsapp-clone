@@ -1,12 +1,22 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+
+import useMessages from '@/hooks/useMessages';
 
 import Chat from '../ui/Chat';
 import DefaultScreen from '../ui/DefaultScreen';
-import Message from '../ui/Message';
 import MessageInput from '../ui/MessageInput';
+import Message from './Message';
 
-const ChatWindow = ({ socket, messages }) => {
+const ChatWindow = ({ socket }) => {
   const chat = useSelector((state) => state.chat);
+  const message = useMessages("65c2641ab0cee5b68cedc3b3");
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    setMessages([...message, ...messages]);
+    console.log(...message);
+  }, [message]);
 
   return (
     <>
@@ -15,16 +25,21 @@ const ChatWindow = ({ socket, messages }) => {
           <Chat />
           <div className="flex flex-col items-center gap-1 w-full py-5">
             <div className="flex flex-col items-end w-[95%] text-sm gap-1">
-              {messages.map((message, index) => {
-                return (
-                  <Message key={index} date="10:30 PM">
-                    {message}
-                  </Message>
-                );
-              })}
+              {messages &&
+                messages.map((message, index) => {
+                  return (
+                    <Message key={index} date="10:30 PM">
+                      {message.message}
+                    </Message>
+                  );
+                })}
             </div>
           </div>
-          <MessageInput socket={socket} />
+          <MessageInput
+            messages={messages}
+            setMessages={setMessages}
+            socket={socket}
+          />
         </div>
       ) : (
         <DefaultScreen />
