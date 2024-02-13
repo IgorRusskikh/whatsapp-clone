@@ -1,11 +1,11 @@
 "use client";
 
-import { SessionProvider } from 'next-auth/react';
-import { Provider } from 'react-redux';
+import { SessionProvider } from "next-auth/react";
+import { Provider } from "react-redux";
 
-import MainWindow from '@/ui/MainWindow';
+import MainWindow from "@/ui/MainWindow";
 
-import store from './store';
+import store from "./store";
 
 export default function Home() {
   return (

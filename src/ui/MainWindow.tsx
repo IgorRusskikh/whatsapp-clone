@@ -29,6 +29,8 @@ const MainWindow = () => {
     );
   });
 
+  console.log(user);
+
   return (
     <>
       {user.user ? (

@@ -14,6 +14,7 @@ const InputMessage = ({ socket }) => {
       reciever: chat.chatId,
       sender: userId,
       chatId: chat.chatId,
+      createdAt: Date.now(),
     };
 
     socket.emit("message", {
@@ -21,6 +22,7 @@ const InputMessage = ({ socket }) => {
       message: newMessage,
       sender: userId,
       reciever: chat.chatId,
+      // createdAt: Date.now().toLocaleString(),
     });
 
     setNewMessage("");
