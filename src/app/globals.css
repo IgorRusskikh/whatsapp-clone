@@ -4,6 +4,7 @@
 
 body {
   background-color: #0c1317;
+  user-select: none;
 }
 
 ::-webkit-scrollbar {

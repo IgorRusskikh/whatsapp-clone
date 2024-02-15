@@ -42,7 +42,7 @@ const Messages = () => {
           <div
             key={index}
             className={
-              "flex w-full px-12 pt-5 " +
+              "flex w-full px-12 pt-5 select-text " +
               (message.sender === userId ? "justify-end" : "justify-start")
             }
           >
@@ -53,7 +53,11 @@ const Messages = () => {
             >
               <div className="text-[#e9edef]">{message.message}</div>
               <span className="float float-right ml-3 text-xs text-[#99beb7]">
-                10:30PM
+                {`${new Date(message.createdAt)
+                  .toLocaleTimeString()
+                  .split(":")
+                  .splice(0, 2)
+                  .join(":")}`}
               </span>
             </div>
           </div>

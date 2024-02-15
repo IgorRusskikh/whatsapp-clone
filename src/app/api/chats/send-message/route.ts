@@ -10,7 +10,7 @@ export const POST = async (req: Request) => {
       data: body,
     });
 
-    console.log(message);
+    console.log(message.createdAt.getDay())
 
     return NextResponse.json(message);
   } catch (error: any) {

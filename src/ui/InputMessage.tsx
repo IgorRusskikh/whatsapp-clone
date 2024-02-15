@@ -1,20 +1,21 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const InputMessage = ({ socket }) => {
   const [newMessage, setNewMessage] = useState("");
   const chat = useSelector((state) => state.chat);
   const userId = useSelector((state) => state.user.user.id);
-  const dispatch = useDispatch();
 
   const sendMessage = async () => {
+    const timeSended = new Date().toISOString();
+
     const messageData = {
       message: newMessage,
       reciever: chat.chatId,
       sender: userId,
       chatId: chat.chatId,
-      createdAt: Date.now(),
+      createdAt: timeSended,
     };
 
     socket.emit("message", {
@@ -22,7 +23,7 @@ const InputMessage = ({ socket }) => {
       message: newMessage,
       sender: userId,
       reciever: chat.chatId,
-      // createdAt: Date.now().toLocaleString(),
+      createdAt: timeSended,
     });
 
     setNewMessage("");
@@ -37,7 +38,7 @@ const InputMessage = ({ socket }) => {
   };
 
   return (
-    <div className="flex items-center gap-5 w-full absolute bottom-0 bg-[#202c33] px-7 py-3">
+    <div className="flex items-center gap-5 w-full bottom-0 bg-[#202c33] px-7 py-3">
       <div className="flex gap-4">
         <Image src="/svg/smile.svg" width={26} height={26} alt="" />
         <Image src="/svg/plus.svg" width={26} height={26} alt="" />

@@ -5,6 +5,7 @@ import useSocket from '@/hooks/useSocket';
 
 import AuthForm from './AuthForm';
 import ChatList from './ChatList';
+import DefaultScreen from './DefaultScreen';
 import HeaderChat from './HeaderChat';
 import HeaderChats from './HeaderChats';
 import InputMessage from './InputMessage';
@@ -18,18 +19,16 @@ const MainWindow = () => {
   const dispatch = useDispatch();
 
   const socket = useSocket("http://localhost:8000", (message: string) => {
-    console.log(message);
     dispatch(
       addMessage({
         chatId: message.room,
         message: message.message,
         sender: message.sender,
         reciever: message.reciever,
+        createdAt: new Date().toISOString(),
       })
     );
   });
-
-  console.log(user);
 
   return (
     <>
@@ -40,10 +39,16 @@ const MainWindow = () => {
             <SearchChats />
             <ChatList socket={socket} />
           </div>
-          <div className="w-full h-full relative">
-            <HeaderChat />
-            <Messages />
-            <InputMessage socket={socket} />
+          <div className="flex flex-col justify-between w-full h-full">
+            {chat.chatId ? (
+              <>
+                <HeaderChat />
+                <Messages />
+                <InputMessage socket={socket} />
+              </>
+            ) : (
+              <DefaultScreen />
+            )}
           </div>
         </>
       ) : (

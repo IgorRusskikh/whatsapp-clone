@@ -16,7 +16,5 @@ export const POST = async (req: Request) => {
     },
   });
 
-  console.log(chat);
-
   return NextResponse.json(chat);
 };
